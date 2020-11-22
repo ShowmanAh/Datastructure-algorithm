@@ -116,26 +116,44 @@ class BinaryTree{
        return $parent;
    }
    public function removeElement($element){
-       if ($this->isEmpty()) {
+       if ($this->isEmpty()) {// check tree is empty
            return false;
        }
-       $node = $this->retrieveNode($element);
+       $node = $this->retrieveNode($element);// retrive element to delete it
        if (!$node) {
            return false;
        }
-       if ($element->data === $this->root->data) {
+       //Case one remove the root
+       //Find the smallest node in the right subtree
+       //Find the biggest node in the left subtree
+       if ($element->data === $this->root->data) { // check elemnt equal root 
            $curent = $this->root->left;
            while ($curent->right != null) {
                $curent = $this->root->right;
                continue;
            }
+            // set this node to be this root
        $curent->left = $this->root->left;
        $curent->right = $this->root->right;
+       //Find the parent for the node and set it as the parent for any children the node may have had
        $parent = $this->findParent($current, $this->root);
        $parent->right = $curent->left;
-       $this->root = $curent->left; 
+       $this->root = $curent->left;
+       return true; 
        }
-       return true;
+       // case remove leaf from tree
+       if ($node->left === null && $node->right === null) {
+           $parent = $this->findParent($node, $this->root);
+           if ($parent->left->data && $node->left === $parent->left->data) {
+               $parent->left = null;
+               return true;
+           }elseif ($parent->right->data && $node->right === $parent->right->data) {
+               $parent->right = null;
+               return true;
+           }
+           return $parent;
+
+       }
       
    }
 }
