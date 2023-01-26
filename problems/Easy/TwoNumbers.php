@@ -5,7 +5,7 @@ error_reporting(E_ALL);
 //(nlog n)
 function twoNumber(array $array, int $target){
     sort($array);
-    $left = 0;
+  
     $right = count($array) -1;
     while ($left < $right){
         $sumCurrent = $array[$left] + $array[$right];
