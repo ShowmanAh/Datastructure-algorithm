@@ -116,6 +116,7 @@ class BinaryTree{
        return $parent;
    }
    public function removeElement($element){
+        $current = null;
        if ($this->isEmpty()) {// check tree is empty
            return false;
        }
